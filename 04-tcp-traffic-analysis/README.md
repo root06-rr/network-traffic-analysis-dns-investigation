@@ -58,7 +58,7 @@ tcp.flags.syn == 1 and tcp.flags.ack == 0 and tcp.window_size <= 1024
 
 These are the signatures described in my notes. I treat them as filters for reviewing traffic, not as a standalone verdict that a scan is malicious.
 
-## How I would review a capture
+## How I review a capture
 
 1. Start with the TCP traffic.
 2. Isolate initial SYN packets.
@@ -67,10 +67,15 @@ These are the signatures described in my notes. I treat them as filters for revi
 5. Review resets and connection teardown.
 6. Compare repeated connection attempts and their targets.
 
-## Source
+## Original PCAP review
 
-[My Notion notes: Wireshark Traffic Analysis](https://app.notion.com/p/3edf055fceba80979359e93edc7bb146)
+I reviewed TCP traffic in [my supplied capture](../assets/network-traffic-investigation.pcapng). The capture contains 5,228 TCP packets.
 
+I counted 141 initial SYN packets, 95 SYN-ACK packets, 48 reset packets, and 153 FIN packets. The 141 SYN packets include repeated transmissions. They do not represent 141 separate destination ports or 141 independent scan targets.
+
+All initial SYN packets in the capture came from `192.168.197.130`. A notable pattern was 48 SYN packets sent to `34.223.124.45:80` across six client source ports. Two of those connections later received SYN-ACK responses. The packet sequence shows repeated connection attempts to the same web service, not a broad port sweep.
+
+The capture does not provide enough evidence to label this activity as a TCP scan. Repeated SYN packets can occur when a connection attempt is retransmitted. I have kept that interpretation separate from the packet counts.
 
 ## UDP, ICMP, and ARP traffic analysis
 
@@ -94,6 +99,8 @@ ARP maps local network IP addresses to MAC addresses. I look for conflicting cla
 
 ![ARP spoofing indicators](../assets/wireshark-traffic-analysis/04-arp-spoofing-indicators.png)
 
+The supplied capture contains seven ARP packets. I did not find two different MAC addresses claiming the same IP address in those packets.
+
 ### TCP scan lifecycle and filters
 
 The TCP scan reference below connects the flag values and filter patterns described earlier with the expected connection sequence.
@@ -104,4 +111,13 @@ The TCP scan reference below connects the flag values and filter patterns descri
 
 ![Essential Wireshark display filters](../assets/wireshark-traffic-analysis/05-essential-display-filters.png)
 
-The images are reference material from my Notion notes. They are not evidence from an original packet capture in this repository.
+The images are reference material from my Notion notes. They are not evidence from the original packet capture.
+
+## Related investigation
+
+- [Full capture summary](../08-pcap-investigation/README.md)
+- [TCP packet findings](../08-pcap-investigation/tcp-investigation.md)
+
+## Source
+
+[My Notion notes: Wireshark Traffic Analysis](https://app.notion.com/p/3edf055fceba80979359e93edc7bb146)

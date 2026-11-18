@@ -6,7 +6,7 @@ My focus is on understanding what network traffic can show, how I can use Wiresh
 
 ## Project scope
 
-The project is based on my existing Notion notes. It covers:
+The project is based on my existing Notion notes and one original network capture that I collected and supplied for analysis. It covers:
 
 - Network traffic analysis and the difference between metadata and packet payloads
 - Wireshark packet dissection, filtering, stream analysis, and capture statistics
@@ -15,6 +15,7 @@ The project is based on my existing Notion notes. It covers:
 - TCP flags and connection behaviour
 - HTTP request and response inspection, including file extraction concepts
 - Visibility limits when traffic uses TLS, SSH, and other secure protocols
+- A packet-level review of my supplied PCAPNG capture
 
 ## How I have organized the work
 
@@ -24,11 +25,12 @@ The project is based on my existing Notion notes. It covers:
 | [Network fundamentals](01-network-fundamentals/README.md) | Network traffic analysis, visibility, and the TCP/IP layers |
 | [Wireshark](02-tools/wireshark.md) | Packet dissection, filters, streams, exports, and statistics |
 | [tcpdump](02-tools/tcpdump.md) | Command-line capture, filters, and offline review |
-| [DNS investigation](03-dns-investigation/README.md) | DNS log example, tunneling concepts, TXT records, and investigation limits |
+| [DNS investigation](03-dns-investigation/README.md) | DNS log examples, tunneling concepts, and original capture findings |
 | [DNS and HTTP fundamentals](03-dns-investigation/dns-http-fundamentals.md) | Domain structure, URLs, HTTP requests, responses, status codes, and headers |
-| [TCP traffic analysis](04-tcp-traffic-analysis/README.md) | TCP flags, handshakes, and scan signatures from my notes |
-| [HTTP file transfer](05-http-file-transfer/README.md) | Proxy metadata, packet payloads, stream reassembly, and object extraction |
+| [TCP traffic analysis](04-tcp-traffic-analysis/README.md) | TCP flags, handshakes, scan signatures, and original capture findings |
+| [HTTP file transfer](05-http-file-transfer/README.md) | Proxy metadata, packet payloads, stream reassembly, and original capture findings |
 | [Protocol visibility](06-protocol-visibility/README.md) | What I can and cannot inspect in secure protocol traffic |
+| [PCAP investigation](08-pcap-investigation/README.md) | Capture details, DNS, TCP, HTTP, findings, and limitations |
 | [Reference material](07-reference/README.md) | Filters, commands, and source notes |
 
 ## My investigation approach
@@ -37,11 +39,19 @@ I start with the information available in the logs or capture. I identify the so
 
 I keep observations separate from conclusions. A suspicious domain, unusual query, or connection pattern can justify further review, but it does not automatically prove compromise, data theft, or command execution.
 
+## Original capture
+
+I reviewed the supplied file at [assets/network-traffic-investigation.pcapng](assets/network-traffic-investigation.pcapng).
+
+The capture contains 10,112 packets over approximately 5 minutes and 22 seconds. It includes DNS, TCP, UDP, ARP, HTTP, and TLS-related traffic. The detailed findings are in [08-pcap-investigation](08-pcap-investigation/README.md).
+
+The capture shows DNS resolution and web requests during the recorded period. I did not find DNS TXT queries or an HTTP file transfer matching the ZIP extraction example in my notes. I have not treated the unusual-looking NeverSSL subdomain as malicious because the capture also shows it being resolved and used in an HTTP request to the same service.
+
 ## Evidence and project status
 
-The examples currently documented here come from my Notion learning notes. They are reference examples, not a claim that I captured or investigated the underlying traffic myself.
+The supplied capture is the evidence source for this review. The investigation reports separate packet observations from interpretation and state what the capture does not prove.
 
-I have not added fabricated PCAP files, packet screenshots, extracted binaries, hashes, or tool output. When I add original capture evidence, I will document the source and connect each finding to the relevant packet or log record.
+The DNS tunneling and HTTP ZIP download examples elsewhere in this repository remain reference examples from my Notion notes. They are not findings from this capture.
 
 ## Reference images
 
@@ -56,7 +66,7 @@ I organized the images from my six Notion pages into the `assets` directory and 
 | [wireshark-traffic-analysis](assets/wireshark-traffic-analysis/) | [TCP, UDP, ICMP, and ARP analysis](04-tcp-traffic-analysis/README.md) | TCP scan, UDP filters, ICMP errors, ARP indicators, and display filters |
 | [wireshark](assets/wireshark/) | [Wireshark](02-tools/wireshark.md) | Capture setup, packet inspection, filters, and statistics |
 
-There were 66 uploaded image files. I kept 65 unique images and removed one exact duplicate. Every remaining image is embedded in a project Markdown file. These images are reference material from my notes, not proof of a separate incident investigation.
+There were 66 uploaded image files. I kept 65 unique images and removed one exact duplicate. These images are reference material from my notes, not proof of a separate incident investigation.
 
 ## Source notes
 
@@ -70,4 +80,4 @@ There were 66 uploaded image files. I kept 65 unique images and removed one exac
 
 ## Current status
 
-This repository is the organized documentation stage of my network traffic analysis work. The next step is to add original PCAP-based exercises and record the actual observations only when I have the capture files and supporting evidence.
+I have added an original PCAP-based investigation to the documentation. The capture supports DNS, TCP, and HTTP observations. It does not contain evidence for every scenario in my reference notes, so I have documented those gaps instead of filling them with assumed results.

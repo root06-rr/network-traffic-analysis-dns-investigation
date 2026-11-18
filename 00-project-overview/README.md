@@ -25,14 +25,15 @@ I focus on three areas:
 - TCP flags and scan behaviour
 - HTTP request and response inspection
 - TLS and secure protocol visibility limits
+- Original packet review using my supplied PCAPNG capture
 
 ## What this project is not
 
 This repository is not presented as a production network monitoring deployment. It does not claim that I investigated a live organization or handled a real security incident.
 
-The DNS and HTTP examples are taken from my notes. They help explain investigation methods, but they are not original PCAP evidence from my environment.
+The DNS tunneling and HTTP file extraction scenarios in my notes are reference examples. My original capture review is documented separately and does not show those scenarios.
 
-## How I will document findings
+## How I document findings
 
 For each example, I separate:
 
@@ -42,3 +43,11 @@ For each example, I separate:
 - **Limitations:** What cannot be confirmed from the available information.
 
 This keeps the documentation clear about the difference between an indicator and a confirmed finding.
+
+## Original capture review
+
+I added a packet-level review of my supplied capture. It contains DNS queries and responses, TCP and UDP communication, HTTP requests, and TLS-related traffic.
+
+The capture did not show DNS TXT queries or the example ZIP file transfer described in my notes. I recorded those as limitations rather than presenting the reference scenarios as observed activity.
+
+See [PCAP Investigation](../08-pcap-investigation/README.md) for the capture details and findings.
