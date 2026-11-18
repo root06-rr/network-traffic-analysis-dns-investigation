@@ -60,7 +60,7 @@ tcpdump -r capture.pcap "port 53" -nn
 4. [13. tcpdump](https://app.notion.com/p/3c2f055fceba8086af04d794e8b83e17)
 5. [11. Network Secure Protocols](https://app.notion.com/p/3bbf055fceba80a1a0b3f26ead0c17cd)
 6. [1. DNS and HTTP](https://app.notion.com/p/3b4f055fceba80ac8ca5d0c7ab247bcc)
-7. [24. Incident Detection and Network Monitoring](https://app.notion.com/p/376f055fceba80d5b4bc-e75293d9bb4b)
+7. [24. Incident Detection and Network Monitoring](https://app.notion.com/p/376f055fceba80d5b4bce75293d9bb4b)
 
 ## Documentation note
 
