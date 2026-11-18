@@ -43,3 +43,22 @@ I do not assume that a protocol label reveals the full activity inside a session
 - [Network Secure Protocols](https://app.notion.com/p/3bbf055fceba80a1a0b3f26ead0c17cd)
 - [DNS and HTTP](https://app.notion.com/p/3b4f055fceba80ac8ca5d0c7ab247bcc)
 - [Network Traffic Analysis](https://app.notion.com/p/3ecf055fceba80bbac9bce5286c10134)
+
+
+## Protocol flow references
+
+These are the actual screenshots from my Network Secure Protocols notes. I use them to compare plaintext HTTP communication with the connection stages used by HTTP and HTTPS.
+
+### Plaintext HTTP
+
+![Plaintext HTTP traffic example](../assets/secure-protocols/01-http-plaintext-traffic.png)
+
+### HTTP connection lifecycle
+
+![HTTP connection lifecycle](../assets/secure-protocols/02-http-connection-lifecycle.png)
+
+### HTTPS and TLS connection lifecycle
+
+![HTTPS and TLS connection lifecycle](../assets/secure-protocols/03-https-tls-connection-lifecycle.png)
+
+These are protocol reference images. They do not represent a decrypted HTTPS session or evidence collected from a live network.
