@@ -32,7 +32,7 @@ My notes discuss the randomized-looking subdomain, the TXT query, and the possib
 
 The entries provide a starting point for analysis. They do not include the full DNS response, a complete query history, or a PCAP. Two timestamps alone do not establish a repeated beacon interval. The log lines also do not show that a command was executed.
 
-## How I would review this activity
+## How I review DNS activity
 
 1. Identify the source host and the timestamps.
 2. Review the full queried domain names and record types.
@@ -41,15 +41,36 @@ The entries provide a starting point for analysis. They do not include the full 
 5. Review DNS responses in a packet capture if one is available.
 6. Correlate the activity with other relevant logs before reaching a conclusion.
 
+## Original PCAP review
+
+I reviewed DNS traffic in [my supplied capture](../assets/network-traffic-investigation.pcapng). It contains 149 DNS queries and 149 responses between `192.168.197.130` and the resolver at `192.168.197.2`.
+
+The observed query types were:
+
+| Query type | Queries |
+| --- | ---: |
+| A | 59 |
+| AAAA | 54 |
+| HTTPS | 36 |
+| TXT | 0 |
+
+The capture contains 48 distinct queried names. All 149 DNS responses had response code 0. I did not find NXDOMAIN responses or TXT queries in this capture.
+
+One query worth documenting is `brightsilvermajesticlove.neverssl.com`. The A query appears in frame 9892 and the response in frame 9898 returns `34.223.124.45`. The same hostname appears in an HTTP GET request in frame 10013. The server responds with HTTP 200 in frame 10015.
+
+The long subdomain is unusual, but the matching DNS resolution and HTTP request to the same service do not support calling it DNS tunneling or command-and-control activity. The capture does not explain why the subdomain was used.
+
 ## What I can and cannot conclude
 
-The example shows DNS queries from the same internal source address. The query names and record types are worth reviewing in the context described by my notes.
+The capture shows ordinary DNS request and response activity from the recorded host. It provides query names, record types, response codes, and answer records.
 
-Without the related packet capture, resolver records, baseline, and supporting endpoint evidence, I cannot independently confirm tunneling, data exfiltration, command delivery, or execution.
+I did not observe DNS TXT activity in this capture. I cannot use it to demonstrate TXT-based command delivery or DNS data exfiltration. I also cannot confirm or rule out activity outside the capture period.
 
-## DNS and HTTP reference
+## Related investigation
 
-I also organized the DNS and HTTP screenshots and supporting notes on the [DNS and HTTP fundamentals page](dns-http-fundamentals.md).
+- [Full capture summary](../08-pcap-investigation/README.md)
+- [DNS packet findings](../08-pcap-investigation/dns-investigation.md)
+- [DNS and HTTP fundamentals](dns-http-fundamentals.md)
 
 ## Related notes
 

@@ -54,7 +54,22 @@ My notes describe the following Wireshark workflow:
 5. Select **HTTP**.
 6. Review the listed objects and save the relevant file if it is present.
 
-The extracted file can then be examined separately. My notes mention calculating a SHA-256 hash and checking the file with suitable analysis tools. This repository does not contain the example ZIP file or a hash because neither was supplied as evidence.
+The extracted file can then be examined separately. My notes mention calculating a SHA-256 hash and checking the file with suitable analysis tools.
+
+## Original PCAP review
+
+I reviewed the HTTP requests and responses in [my supplied capture](../assets/network-traffic-investigation.pcapng).
+
+The decoded HTTP traffic includes:
+
+- A GET request to `detectportal.firefox.com/success.txt?ipv4` with a 200 response and a text/plain response body.
+- OCSP POST requests to `ocsp.starfieldtech.com` and `ocsp.r2m04.amazontrust.com`, with 200 responses using the `application/ocsp-response` content type.
+- A GET request to `neverssl.com` with a 200 response and an HTML response.
+- A GET request to `brightsilvermajesticlove.neverssl.com` with a 200 response and an HTML response.
+
+The two NeverSSL responses report `text/html; charset=UTF-8` and a content length of 1,900 bytes. I did not find a response with the ZIP content type or a request path matching the suspicious ZIP example from my notes.
+
+I therefore did not extract or hash a file. The capture does not provide evidence for the HTTP ZIP download scenario described in my reference notes.
 
 ## Limitations
 
@@ -63,6 +78,11 @@ The extracted file can then be examined separately. My notes mention calculating
 - HTTPS payloads are encrypted unless the traffic is available through an authorized decryption or inspection method.
 - A filename or content type does not prove what a file contains.
 - A successful download does not prove that a file is malicious.
+
+## Related investigation
+
+- [Full capture summary](../08-pcap-investigation/README.md)
+- [HTTP packet findings](../08-pcap-investigation/http-investigation.md)
 
 ## Source
 
