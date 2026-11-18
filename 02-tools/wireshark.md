@@ -4,69 +4,133 @@
 
 Wireshark is a packet analyzer that can capture live traffic and inspect PCAP or PCAPNG files. I use it to examine packet headers, protocol fields, and captured payloads.
 
-My notes cover packet dissection, packet navigation, filtering, stream analysis, object export, and capture statistics.
+My notes cover packet capture, packet dissection, packet navigation, filtering, stream analysis, object export, and capture statistics.
 
-## Packet dissection
+The screenshots in this page are the actual image files uploaded from my Wireshark Notion notes. They document the tool and its features. They are not evidence from a single incident investigation.
 
-When I select a packet in the packet list, Wireshark displays the protocol details for that frame. Selecting a field in the packet details also highlights the related bytes in the packet bytes pane.
+## 1. Capture setup and interface
 
-This helps me move from a packet summary to the specific fields that make up the packet.
+I start by identifying the network interface and selecting the right capture options. I also use the main Wireshark interface to review the packet list, packet details, and packet bytes.
 
-## Capture filters and display filters
+![Wireshark traffic sniffing and capture controls](../assets/wireshark/01-traffic-sniffing-control.png)
 
-I keep the difference clear:
+![Wireshark main interface](../assets/wireshark/02-wireshark-interface.png)
 
-- **Capture filters** are set before capture. They decide which packets are recorded.
-- **Display filters** are applied after capture. They change which recorded packets are shown without removing the other packets from the capture file.
+## 2. Packet coloring and capture files
 
-## Useful display filters from my notes
+Packet coloring helps me recognize traffic patterns in the packet list. Wireshark also supports merging capture files and reviewing details about a capture before analysis.
 
-| Purpose | Filter |
-| --- | --- |
-| DNS traffic | `dns` |
-| UDP traffic involving port 53 | `udp.port == 53` |
-| Traffic involving an IP address | `ip.addr == 192.168.1.16` |
-| TCP traffic | `tcp` |
-| Unencrypted HTTP traffic | `http` |
-| ARP traffic | `arp` |
-| ICMP traffic | `icmp` |
-| DNS queries only | `dns.flags.response == 0` |
-| DNS responses only | `dns.flags.response == 1` |
-| DNS A record queries | `dns.qry.type == 1` |
-| HTTP responses with status 200 | `http.response.code == 200` |
-| HTTP GET requests | `http.request.method == "GET"` |
+![Wireshark packet coloring rules](../assets/wireshark/03-packet-coloring-rules.png)
 
-The filter `ip.addr` matches an address in either direction. The fields `ip.src` and `ip.dst` let me narrow the direction.
+![Merging PCAP files in Wireshark](../assets/wireshark/04-merging-pcap-files.gif)
 
-## Following a stream
+![Wireshark capture file properties](../assets/wireshark/05-capture-file-properties.png)
 
-The Follow Stream feature reconstructs the application data exchanged within a TCP, UDP, or HTTP stream when the required data is present in the capture.
+## 3. Packet dissection and navigation
 
-It is useful when I need to review a conversation instead of reading individual packets in isolation.
+When I select a packet, Wireshark displays its protocol layers and fields. I can move to a packet by number, search packet contents, mark packets, add comments, and export selected packets.
 
-## Exporting objects
+![Wireshark packet dissection layers](../assets/wireshark/06-packet-dissection-layers.png)
 
-My notes describe the Wireshark path:
+![Packet number navigation](../assets/wireshark/07-packet-navigation.png)
 
-1. Open **File**.
-2. Select **Export Objects**.
-3. Choose the relevant protocol, such as HTTP or SMB.
-4. Review the available files, content types, and hostnames.
-5. Select an object and save it for further analysis.
+![Finding packets in a capture](../assets/wireshark/08-find-packets.png)
 
-Object extraction depends on the relevant transfer being present in the capture and supported by the protocol dissector. An encrypted stream does not automatically expose its application files.
+![Marking packets for review](../assets/wireshark/09-mark-packets.png)
 
-## Capture statistics
+![Adding packet comments](../assets/wireshark/10-packet-comments.png)
 
-The Statistics menu helps me get an overview of an unfamiliar capture.
+![Exporting selected packets](../assets/wireshark/11-export-packets.png)
 
-The sections in my notes include:
+## 4. Time display and expert information
 
-- **Resolved Addresses:** Shows IP addresses mapped to hostnames using DNS answers present in the capture.
-- **Protocol Hierarchy:** Summarizes protocols and their packet or byte counts.
-- **Conversations and endpoints:** Help identify systems communicating in the capture.
+I can change how packet timestamps are displayed. Expert Information also helps identify protocol warnings, errors, and other conditions that may need closer review.
 
-I use these views to decide where to focus next. They are starting points for investigation, not proof of malicious activity.
+![Wireshark time display options](../assets/wireshark/12-time-display-format.png)
+
+![Wireshark Expert Information](../assets/wireshark/13-expert-information.png)
+
+## 5. Packet filtering
+
+I use capture filters to limit what is recorded and display filters to narrow the view of packets already captured. I can build filters through the interface or write expressions directly.
+
+![Wireshark capture and display filter concepts](../assets/wireshark/14-capture-and-display-filters.png)
+
+![Wireshark IP and protocol filters](../assets/wireshark/15-ip-and-protocol-filters.png)
+
+![Wireshark display filter comparison operators](../assets/wireshark/16-display-filter-comparison-operators.png)
+
+### Contains, regular expressions, and set membership
+
+These filter examples show how I can search for text, match patterns, or check whether a field belongs to a defined set.
+
+![Wireshark contains filter examples](../assets/wireshark/17-contains-filter-examples.png)
+
+![Wireshark regular expression filter examples](../assets/wireshark/18-regex-filter-examples.png)
+
+![Wireshark set membership filter examples](../assets/wireshark/19-set-membership-filter-examples.png)
+
+### Case normalization and type conversion
+
+These examples show functions that change field values before comparison. They are useful when matching text with different capitalization or converting a numeric field into a string.
+
+![Wireshark lowercase normalization](../assets/wireshark/20-lowercase-normalization.png)
+
+![Wireshark uppercase normalization](../assets/wireshark/21-uppercase-normalization.png)
+
+![Wireshark string conversion filters](../assets/wireshark/22-string-conversion-filters.png)
+
+### Reusing filters and profiles
+
+I can save filter expressions as bookmarks, add quick-access filter buttons, and use configuration profiles to keep different analysis settings separate.
+
+![Wireshark filter bookmarks](../assets/wireshark/23-filter-bookmarks.png)
+
+![Wireshark display filter buttons](../assets/wireshark/24-filter-buttons.png)
+
+![Wireshark configuration profiles](../assets/wireshark/25-configuration-profiles.png)
+
+## 6. Capture statistics
+
+The Statistics menu gives me a high-level view of the capture. I use it to review protocol distribution, communicating endpoints, conversations, name resolution, and protocol-specific statistics.
+
+![Wireshark statistics overview](../assets/wireshark/26-statistics-overview.png)
+
+![Wireshark protocol hierarchy](../assets/wireshark/27-protocol-hierarchy.png)
+
+![Wireshark conversations statistics](../assets/wireshark/28-conversations.png)
+
+![Wireshark endpoints statistics](../assets/wireshark/29-endpoints.png)
+
+### Name resolution
+
+These views cover global name resolution settings and the name resolution options available in the Endpoints and Conversations windows.
+
+![Global Wireshark name resolution settings](../assets/wireshark/30-global-name-resolution.png)
+
+![Endpoint name resolution options](../assets/wireshark/31-endpoint-name-resolution.png)
+
+![Conversation name resolution options](../assets/wireshark/32-conversation-name-resolution.png)
+
+### IP geolocation and protocol statistics
+
+The following screenshots cover IP geolocation settings and the IPv4, IPv6, DNS, and HTTP statistics views described in my notes.
+
+![Wireshark IP geolocation settings](../assets/wireshark/33-ip-geolocation-settings.png)
+
+![Wireshark IP geolocation limitations](../assets/wireshark/34-ip-geolocation-limitations.png)
+
+![Wireshark IPv4 and IPv6 statistics](../assets/wireshark/35-ipv4-ipv6-statistics.png)
+
+![Wireshark DNS statistics](../assets/wireshark/36-dns-statistics.png)
+
+![Wireshark HTTP statistics](../assets/wireshark/37-http-statistics.png)
+
+## 7. Stream analysis and object export
+
+I can follow a TCP, UDP, or HTTP stream to review a conversation when the required packets are present. For supported protocols, Wireshark can also export objects found in the capture.
+
+Object extraction depends on the traffic being captured and the payload being available. Encrypted application data is not automatically readable.
 
 ## Source
 
