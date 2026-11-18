@@ -47,6 +47,10 @@ The example shows DNS queries from the same internal source address. The query n
 
 Without the related packet capture, resolver records, baseline, and supporting endpoint evidence, I cannot independently confirm tunneling, data exfiltration, command delivery, or execution.
 
+## DNS and HTTP reference
+
+I also organized the DNS and HTTP screenshots and supporting notes on the [DNS and HTTP fundamentals page](dns-http-fundamentals.md).
+
 ## Related notes
 
 - [Network Traffic Analysis](https://app.notion.com/p/3ecf055fceba80bbac9bce5286c10134)
