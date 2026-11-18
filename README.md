@@ -25,6 +25,7 @@ The project is based on my existing Notion notes. It covers:
 | [Wireshark](02-tools/wireshark.md) | Packet dissection, filters, streams, exports, and statistics |
 | [tcpdump](02-tools/tcpdump.md) | Command-line capture, filters, and offline review |
 | [DNS investigation](03-dns-investigation/README.md) | DNS log example, tunneling concepts, TXT records, and investigation limits |
+| [DNS and HTTP fundamentals](03-dns-investigation/dns-http-fundamentals.md) | Domain structure, URLs, HTTP requests, responses, status codes, and headers |
 | [TCP traffic analysis](04-tcp-traffic-analysis/README.md) | TCP flags, handshakes, and scan signatures from my notes |
 | [HTTP file transfer](05-http-file-transfer/README.md) | Proxy metadata, packet payloads, stream reassembly, and object extraction |
 | [Protocol visibility](06-protocol-visibility/README.md) | What I can and cannot inspect in secure protocol traffic |
