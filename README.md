@@ -43,6 +43,21 @@ The examples currently documented here come from my Notion learning notes. They 
 
 I have not added fabricated PCAP files, packet screenshots, extracted binaries, hashes, or tool output. When I add original capture evidence, I will document the source and connect each finding to the relevant packet or log record.
 
+## Reference images
+
+I organized the images from my six Notion pages into the `assets` directory and embedded them in the relevant project documentation.
+
+| Asset folder | Used in | Contents |
+| --- | --- | --- |
+| [dns-http](assets/dns-http/) | [DNS and HTTP fundamentals](03-dns-investigation/dns-http-fundamentals.md) | Domain structure, URLs, HTTP requests, responses, status codes, and headers |
+| [network-traffic-analysis](assets/network-traffic-analysis/) | [Network fundamentals](01-network-fundamentals/README.md) | Network sources, flows, proxy inspection, DNS resolution, and SMB with Kerberos |
+| [secure-protocols](assets/secure-protocols/) | [Protocol visibility](06-protocol-visibility/README.md) | HTTP and HTTPS connection flows |
+| [tcpdump](assets/tcpdump/) | [tcpdump](02-tools/tcpdump.md) | Commands and capture filter examples |
+| [wireshark-traffic-analysis](assets/wireshark-traffic-analysis/) | [TCP, UDP, ICMP, and ARP analysis](04-tcp-traffic-analysis/README.md) | TCP scan, UDP filters, ICMP errors, ARP indicators, and display filters |
+| [wireshark](assets/wireshark/) | [Wireshark](02-tools/wireshark.md) | Capture setup, packet inspection, filters, and statistics |
+
+There were 66 uploaded image files. I kept 65 unique images and removed one exact duplicate. Every remaining image is embedded in a project Markdown file. These images are reference material from my notes, not proof of a separate incident investigation.
+
 ## Source notes
 
 - [Network Traffic Analysis](https://app.notion.com/p/3ecf055fceba80bbac9bce5286c10134)
