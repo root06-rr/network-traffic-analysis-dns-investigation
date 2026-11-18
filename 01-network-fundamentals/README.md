@@ -51,3 +51,30 @@ Logs and packet captures answer different questions.
 - Correlating both sources can help connect an event in a log with the underlying network exchange.
 
 I do not assume that a PCAP contains every packet or that every payload can be read. The capture scope and encryption affect what I can establish.
+
+
+## Network sources and flow examples
+
+The following images are the actual reference files from my Network Traffic Analysis notes. They cover network sources, flow information, and example communication paths.
+
+### Network sources
+
+![Network traffic sources](../assets/network-traffic-analysis/01-network-sources.png)
+
+### Network flows
+
+![Network flow concepts](../assets/network-traffic-analysis/02-network-flows.png)
+
+![Network flow example](../assets/network-traffic-analysis/03-network-flow-example.png)
+
+### Traffic flow examples
+
+The examples below cover HTTPS proxy inspection, external DNS resolution, and SMB file share access using Kerberos authentication. I use them to understand the path communication can take and where inspection may occur.
+
+![HTTPS web proxy inspection flow](../assets/network-traffic-analysis/04-https-proxy-inspection-flow.png)
+
+![External DNS resolution flow](../assets/network-traffic-analysis/05-external-dns-resolution-flow.png)
+
+![SMB file share access with Kerberos](../assets/network-traffic-analysis/06-smb-kerberos-file-share-flow.png)
+
+These are reference diagrams from my notes. They are not packet-level findings from a separate investigation.
