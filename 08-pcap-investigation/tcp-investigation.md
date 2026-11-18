@@ -62,7 +62,7 @@ The capture also contains reset and FIN packets. These flags show connection ter
 
 ## Conclusion
 
-The capture contains normal TCP connection activity and repeated connection attempts to a web service. The observed SYN pattern is not enough to confirm a scan. I have kept the packet counts separate from the interpretation.
+The capture contains TCP connection activity and repeated connection attempts to a web service. The observed SYN pattern is not enough to confirm a scan. I have kept the packet counts separate from the interpretation.
 
 ## Related notes
 

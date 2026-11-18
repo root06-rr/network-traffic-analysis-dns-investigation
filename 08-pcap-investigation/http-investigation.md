@@ -37,7 +37,7 @@ This request matches the hostname observed in the DNS investigation.
 
 My Notion notes describe an HTTP file download example with a ZIP response and a workflow for following the TCP stream and exporting HTTP objects.
 
-I did not find a request for the example ZIP path or a response with the `application/zip` content type in this capture. The observed HTTP content types are text/plain, text/html, application/ocsp-request, and application/ocsp-response.
+In the HTTP request and response headers I identified, I did not find a request for the example ZIP path or a response with the `application/zip` content type. The observed HTTP content types are text/plain, text/html, application/ocsp-request, and application/ocsp-response.
 
 I did not extract a file or calculate a file hash because this capture does not show the ZIP transfer described in my notes.
 

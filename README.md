@@ -45,11 +45,11 @@ I reviewed the supplied file at [assets/network-traffic-investigation.pcapng](as
 
 The capture contains 10,112 packets over approximately 5 minutes and 22 seconds. It includes DNS, TCP, UDP, ARP, HTTP, and TLS-related traffic. The detailed findings are in [08-pcap-investigation](08-pcap-investigation/README.md).
 
-The capture shows normal DNS resolution and web requests during the recorded period. I did not find DNS TXT queries or an HTTP file transfer matching the ZIP extraction example in my notes. I have not treated the unusual-looking NeverSSL subdomain as malicious because the capture also shows it being resolved and used in an HTTP request to the same service.
+The capture shows DNS resolution and web requests during the recorded period. I did not find DNS TXT queries or an HTTP file transfer matching the ZIP extraction example in my notes. I have not treated the unusual-looking NeverSSL subdomain as malicious because the capture also shows it being resolved and used in an HTTP request to the same service.
 
 ## Evidence and project status
 
-The original capture is evidence from my own supplied environment. The investigation reports separate packet observations from interpretation and state what the capture does not prove.
+The supplied capture is the evidence source for this review. The investigation reports separate packet observations from interpretation and state what the capture does not prove.
 
 The DNS tunneling and HTTP ZIP download examples elsewhere in this repository remain reference examples from my Notion notes. They are not findings from this capture.
 
